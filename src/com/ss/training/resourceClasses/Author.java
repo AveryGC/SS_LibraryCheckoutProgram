@@ -57,13 +57,17 @@ public class Author {
     //Necessary map functionality
     static public int addToMap(Map<Integer, Author> mapAuthor, String authorName) {
         Author a = new Author(Author.counter, authorName);
-        mapAuthor.put(Author.counter, a);
+        mapAuthor.put(a.keyID, a);
         Author.counter++;
-        return Author.counter;
+        return a.keyID;
     }
 
-    static public void deleteFromMap() {
-
+    static public void deleteFromMap(Map<Integer,Author> authorMap, Map<Integer,Book> bookMap, int authorID){
+        bookMap.forEach((k,v)->
+            {if(v.getAuthorID()==authorID)
+                Book.deleteFromMap(bookMap,v.getBookID());}
+                );
+        authorMap.remove(authorID);
     }
 
     static public void printMapToConsole(Map<Integer, Author> mapAuthor) {

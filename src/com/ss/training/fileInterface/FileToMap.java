@@ -12,7 +12,13 @@ import java.util.Map;
  * Class used for reading the initial text files and inputing them into the proper Maps
  */
 public class FileToMap {
-    public static void readAuthor(Map<Integer, Author> authorMap){
+
+    /**
+     *
+     * @param authorMap- HashMap of all the books
+     * @return returns true if files was succesfully read and false if file could not be read
+     */
+    public static boolean readAuthor(Map<Integer, Author> authorMap){
         try(BufferedReader bufferedreader = new BufferedReader(new FileReader("resources/Author.txt"))){
             String line = bufferedreader.readLine();
 
@@ -30,12 +36,18 @@ public class FileToMap {
                     Author.counter = Integer.parseInt(splitLine[0]) +1;
                 line = bufferedreader.readLine();
             }
+            return true;
         }
         catch(Exception e){ System.out.println("FILE Author.txt NOT FOUND!!!!");}
+        return false;
     }
 
-
-    public static void readPublisher(Map<Integer, Publisher> publisherMap){
+    /**
+     *
+     * @param publisherMap-HashMap of all the publishers
+     * @return returns true if files was succesfully read and false if file could not be read
+     */
+    public static boolean readPublisher(Map<Integer, Publisher> publisherMap){
         //Try and open text file
         try(BufferedReader bufferedreader = new BufferedReader(new FileReader("resources/Publisher.txt"))){
             String line = bufferedreader.readLine();
@@ -54,11 +66,19 @@ public class FileToMap {
                     Publisher.counter = Integer.parseInt(splitLine[0]) +1;
                 line = bufferedreader.readLine();
             }
+            return true;
         }
         catch(Exception e){ System.out.println("FILE Publisher.txt NOT FOUND!!!!");}
+        return false;
     }
 
-    public static void readBook(Map<Integer, Book> bookMap ){
+
+    /**
+     *
+     * @param bookMap-HashMap of all the books
+     * @return returns true if files was succesfully read and false if file could not be read
+     */
+    public static boolean readBook(Map<Integer, Book> bookMap ){
         //Try and open text filebook
         try(BufferedReader bufferedreader = new BufferedReader(new FileReader("resources/Book.txt"))){
             String line = bufferedreader.readLine();
@@ -77,7 +97,9 @@ public class FileToMap {
                     Book.counter = Integer.parseInt(splitLine[0]) +1;
                 line = bufferedreader.readLine();
             }
+            return true;
         }
         catch(Exception e){ System.out.println("FILE Book.txt NOT FOUND!!!!");}
+        return false;
     }
 }

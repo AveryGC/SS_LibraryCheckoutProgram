@@ -69,19 +69,24 @@ public class Book {
         System.out.println("Book ID: " + this.bookID + "  Book Name : " + this.bookName + " Written By: " + author.get(this.authorID).getFullName() + " Published By: " + publisher.get(this.publisherID).getPublisherName());
     }
 
-    //Necessary map functionality
-    static public int addToMap() {
-        return 0;
+
+    //
+    //NECESARRY MAP FUNCTIONALITY
+    static public int addToMap(Map<Integer,Book> bookMap, String bookName, int authorID, int publisherID ) {
+        Book b = new Book(Book.counter,bookName,authorID,publisherID);
+        bookMap.put(b.bookID,b);
+        Book.counter++;
+        return b.bookID;
     }
 
-    static public void deleteFromMap() {
-
+    static public void deleteFromMap(Map<Integer, Book> bookMap, int bookID) {
+        bookMap.remove(bookID);
     }
 
     static public void printMapToConsole(Map<Integer, Book> book,Map<Integer, Author> author, Map<Integer, Publisher> publisher) {
-        System.out.println("Full List of Books \n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("Full List of Books \n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         book.forEach((k,v)-> v.printToConsole(author, publisher));
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
 
     }

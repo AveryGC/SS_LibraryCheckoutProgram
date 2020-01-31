@@ -9,6 +9,7 @@ import com.ss.training.resourceClasses.Publisher;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String args[]){
@@ -17,21 +18,25 @@ public class Main {
         Map<Integer, Book>  bookMap = new HashMap<Integer,Book>();
         Map<Integer, Publisher> publisherMap = new HashMap<Integer,Publisher>();
 
-        FileToMap.readAuthor(authorMap);
-        FileToMap.readPublisher(publisherMap);
-        FileToMap.readBook(bookMap);
+        //Read files and setup initial HashMaps for authors, books and publishers
+        boolean authorFileSuccess = FileToMap.readAuthor(authorMap);
+        boolean publisherFileSuccess= FileToMap.readPublisher(publisherMap);
+        boolean bookFileSuccess = FileToMap.readBook(bookMap);
 
-
-        if(authorMap.isEmpty()||bookMap.isEmpty()||publisherMap.isEmpty()){
+        //Check
+        if(authorFileSuccess && publisherFileSuccess && bookFileSuccess){
+            System.out.println("File Reading Was a SUCCESS!!!!");
+        }
+        else{
             System.out.println("Please make sure that files are located in proper positions.");
             System.exit(0);
         }
 
+        Scanner scanner = new Scanner(System.in);
 
-        Book.printMapToConsole(bookMap,authorMap,publisherMap);
-        Author.printMapToConsole(authorMap);
-        Publisher.printMapToConsole(publisherMap);
-
+//        Book.printMapToConsole(bookMap,authorMap,publisherMap);
+//        Author.printMapToConsole(authorMap);
+//        Publisher.printMapToConsole(publisherMap);
 
 
     }

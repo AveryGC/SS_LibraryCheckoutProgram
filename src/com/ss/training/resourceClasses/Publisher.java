@@ -56,14 +56,19 @@ public class Publisher {
     //Necessary map functionality
     static public int addToMap(Map<Integer,Publisher> pubMap, String publisherName) {
         Publisher p = new Publisher(Publisher.counter, publisherName);
-        pubMap.put(Publisher.counter, p);
+        pubMap.put(p.keyID, p);
         Publisher.counter++;
-        return Publisher.counter;
+        return p.keyID;
     }
 
-    static public void deleteFromMap() {
-
+    static public void deleteFromMap(Map<Integer,Publisher> authorMap, Map<Integer,Book> bookMap, int publisherID) {
+        bookMap.forEach((k,v)->
+                {if(v.getPublisherID()==publisherID)
+                    Book.deleteFromMap(bookMap,v.getBookID());}
+        );
+        authorMap.remove(publisherID);
     }
+
 
     static public void printMapToConsole(Map<Integer,Publisher> pubMap) {
         System.out.println("Full List of Publishers \n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
