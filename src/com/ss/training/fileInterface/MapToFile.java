@@ -15,11 +15,12 @@ public class MapToFile {
     //write authorMap to file
     public static void saveAuthor(Map<Integer, Author> authorMap){
         try(FileWriter writer = new FileWriter(new File("resources/Author.txt"))){
-            Set<Integer> keySet= authorMap.keySet();
-            for(int i : keySet){
+//            Set<Integer> keySet= authorMap.keySet();
+            for(int i : authorMap.keySet()){
                 writer.write(authorMap.get(i).getKeyID()+","+authorMap.get(i).getFullName()+"\n");
             }
             System.out.println("Authors successfully saved.");
+//            authorMap.forEach((k,v)-> writer.write(v.getKeyID()+","+v.getFullName()+"\n"));
         }
         catch (Exception e){ System.out.println("Author File did not write!!!!");}
     }
@@ -27,8 +28,8 @@ public class MapToFile {
     //writes bookMap to file
     public static void saveBook(Map<Integer,Book> bookMap){
         try (FileWriter writer = new FileWriter(new File("resources/Book.txt"))){
-            Set<Integer> keySet = bookMap.keySet();
-            for(int i : keySet){
+//            Set<Integer> keySet = bookMap.keySet();
+            for(int i : bookMap.keySet()){
                 writer.write(bookMap.get(i).getBookID()+ ","  + bookMap.get(i).getBookName()+","
                         +bookMap.get(i).getAuthorID()+","+bookMap.get(i).getPublisherID()+"\n");
             }
@@ -43,8 +44,8 @@ public class MapToFile {
     //writes publisherMap to file
     public static void savePublisehr(Map<Integer, Publisher> publisherMap){
         try(FileWriter writer = new FileWriter(new File("resources/Publisher.txt"))){
-            Set<Integer> keySet = publisherMap.keySet();
-            for(int i : keySet){
+//            Set<Integer> keySet = publisherMap.keySet();
+            for(int i : publisherMap.keySet()){
                 writer.write(publisherMap.get(i).getKeyID()+","+publisherMap.get(i).getPublisherName()+"\n");
             }
             System.out.println("Publishers successfully saved.");
