@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 
 public class AuthorMenu {
-
     /**
      * displays the main author menu
      * @param scanner - set the in stream to system.io
@@ -44,6 +43,8 @@ public class AuthorMenu {
                         break;
                     default:
                         System.out.println("!!!Please enter proper input option!!!");
+                        break;
+
                 }
             } catch (NumberFormatException e) {System.out.println("!!!!!!!!!Improper Input Format!!!!!!!!!!!!!");}
         }

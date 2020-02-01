@@ -1,6 +1,5 @@
 package com.ss.training;
 
-
 import com.ss.training.fileInterface.FileToMap;
 import com.ss.training.menuOptions.AuthorMenu;
 import com.ss.training.menuOptions.BookMenu;
@@ -53,7 +52,7 @@ public class Main {
                         AuthorMenu.mainAuthorMenu(scanner,bookMap,authorMap);
                         break;
                     case 2:
-                        System.out.println("Book Menu");
+                        BookMenu.mainBookMenu(scanner,bookMap,authorMap,publisherMap);
                         break;
                     case 3:
                         PublisherMenu.mainPublisherMenu(scanner,bookMap,publisherMap);
@@ -66,42 +65,9 @@ public class Main {
                 }
             }
             catch(NumberFormatException e){ System.out.println("!!!!!!!!!Improper Input Format!!!!!!!!!!!!!");}
-
         }
 
 
-//        BookMenu.addBooks(scanner,bookMap,authorMap,publisherMap);
-//        AuthorMenu.addAuthor(scanner,authorMap);
-//        Author.addToMap(authorMap, "Brandon Corbett");
-
-//        AuthorMenu.deleteAuthor(scanner,bookMap,authorMap);
-//        Author.deleteFromMap(authorMap,bookMap,0);
-//        AuthorMenu.updateAuthor(scanner,authorMap);
-//        Author.printMapToConsole(authorMap);
-//        AuthorMenu.readAllAuthors(authorMap);
-
-
-//        PublisherMenu.addPublisher(scanner,publisherMap);
-//        Publisher.addToMap(publisherMap,"Bobby Smurda");
-//        PublisherMenu.deletePublisher(scanner,bookMap,publisherMap);
-//        Publisher.printMapToConsole(publisherMap);
-//        PublisherMenu.updatePublishers(scanner,publisherMap);
-//        PublisherMenu.readAllPublishers(publisherMap);
-
-
-//        BookMenu.deleteBooks(scanner,bookMap,authorMap,publisherMap);
-//        Book.deleteFromMap(bookMap,3);
-//        Book.printMapToConsole(bookMap,authorMap,publisherMap);
-//        int apple = BookMenu.getAuthorID(scanner,authorMap);
-//      int apple =  AuthorMenu.selectAnAuthor(scanner,authorMap);
-//        int apple = PublisherMenu.selectAPublisher(scanner,publisherMap);
-//        int apple =BookMenu.getPublisherID(scanner, publisherMap);
-//        System.out.println(apple);
-
-
-//        Book.printMapToConsole(bookMap,authorMap,publisherMap);
-//        Author.printMapToConsole(authorMap);
-//        Publisher.printMapToConsole(publisherMap);
 
 
     }

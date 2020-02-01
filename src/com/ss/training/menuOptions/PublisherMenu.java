@@ -36,6 +36,8 @@ public class PublisherMenu {
                         break;
                     default:
                         System.out.println("!!!Please enter proper input option!!!");
+                        mainPublisherMenu(scanner,bookMap,publisherMap);
+                        break;
                 }
             } catch (NumberFormatException e) {System.out.println("!!!!!!!!!Improper Input Format!!!!!!!!!!!!!");}
         }
