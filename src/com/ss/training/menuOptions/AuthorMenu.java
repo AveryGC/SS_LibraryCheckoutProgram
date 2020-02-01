@@ -74,7 +74,6 @@ public class AuthorMenu {
             return newAuthor;
         }
     }
-
     /**
      * After selecting delete from the main author menu you will be sent here
      *

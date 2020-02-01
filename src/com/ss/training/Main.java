@@ -1,6 +1,7 @@
 package com.ss.training;
 
 import com.ss.training.fileInterface.FileToMap;
+import com.ss.training.fileInterface.MapToFile;
 import com.ss.training.menuOptions.AuthorMenu;
 import com.ss.training.menuOptions.BookMenu;
 import com.ss.training.menuOptions.PublisherMenu;
@@ -40,6 +41,8 @@ public class Main {
         int input = 40;
         String line;
         Scanner scanner = new Scanner(System.in);
+
+        //main menu and main program functionality
         while (input != 999){
             System.out.println("+                                              Main Menu                                                 +");
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -66,6 +69,12 @@ public class Main {
             }
             catch(NumberFormatException e){ System.out.println("!!!!!!!!!Improper Input Format!!!!!!!!!!!!!");}
         }
+
+        //output to file
+        MapToFile.saveAuthor(authorMap);
+        MapToFile.saveBook(bookMap);
+        MapToFile.savePublisehr(publisherMap);
+
 
 
 

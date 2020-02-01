@@ -96,8 +96,4 @@ public class Author {
         mapAuthor.forEach((k,v)-> v.printToConsole());
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
     }
-
-    static public void printMapToTxtFile() {
-
-    }
 }

@@ -7,6 +7,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class PublisherMenu {
+    /**
+     * main menu of Publisher
+     * @param scanner -Scanner set to system.in
+     * @param bookMap - map of all books
+     * @param publisherMap - map of all publishers
+     */
     public static void mainPublisherMenu(Scanner scanner, Map<Integer,Book> bookMap, Map<Integer,Publisher> publisherMap) {
         String line;
         int input = 40;
@@ -42,6 +48,13 @@ public class PublisherMenu {
             } catch (NumberFormatException e) {System.out.println("!!!!!!!!!Improper Input Format!!!!!!!!!!!!!");}
         }
     }
+
+    /**
+     * adds new publisher to publisher map
+     * @param scanner - scanner set to system.in
+     * @param publisherMap - map of all publisher
+     * @return - the publisherID of book created or 999 if nothing is created
+     */
     public static int addPublisher(Scanner scanner, Map<Integer, Publisher> publisherMap){
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("Enter Name of Publisher you would like to add, or enter the number \"999\" into the console to go back.");
@@ -59,9 +72,15 @@ public class PublisherMenu {
             System.out.println("The following publisher has been successfully added:");
             publisherMap.get(newPub).printToConsole();
             return newPub;
-
         }
     }
+
+    /**
+     * delete publisher from publisher map
+     * @param scanner - Scanner with ifstream of system.in
+     * @param bookMap - map of all books
+     * @param publisherMap - map of all publishers
+     */
     public static void deletePublisher(Scanner scanner, Map<Integer, Book> bookMap, Map<Integer, Publisher> publisherMap){
         Publisher.printMapToConsole(publisherMap);
         System.out.println("Enter the Publisher ID of the publisher you would like to delete or type the number \"999\" to RETURN to last page.");
@@ -88,8 +107,13 @@ public class PublisherMenu {
             System.out.println("Improper Input Format");
             deletePublisher(scanner,bookMap,publisherMap);
         }
-
     }
+
+    /**
+     * Allows user to update a particular publisher
+     * @param scanner - scanner set to ifstream of system.in
+     * @param publisherMap- map of all publishers
+     */
     public static void updatePublishers(Scanner scanner, Map<Integer, Publisher> publisherMap){
         Publisher.printMapToConsole(publisherMap);
         System.out.println("Enter the Publisher ID of the author you would like to update or type the number \"999\" to CANCEL.");
@@ -119,12 +143,23 @@ public class PublisherMenu {
         }
     }
 
+    /**
+     * prints all publishers to screen
+     * @param publisherMap - map of all publishers
+     */
     public static void readAllPublishers(Map<Integer, Publisher> publisherMap) {
         if(publisherMap.isEmpty())
             System.out.println("There are currently NO PUBLISHERS saved in the system.");
         else
             Publisher.printMapToConsole(publisherMap);
     }
+
+    /**
+     * select a particular existing publisher from publisher map
+     * @param scanner- scanner set to system.in
+     * @param publisherMap - map of all publishers
+     * @return - returns the selected publisher ID or returns 999 if operation canceled
+     */
     public static int selectAPublisher(Scanner scanner, Map<Integer, Publisher> publisherMap) {
         Publisher.printMapToConsole(publisherMap);
         System.out.println("Input the ID of the Publisher you would like to select or type the number \"999\" to CANCEL.");

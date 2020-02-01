@@ -10,6 +10,13 @@ import java.util.Scanner;
 
 public class BookMenu {
 
+    /**
+     * Main menu for BookMenu
+     * @param scanner -scanner set to System.in
+     * @param bookMap - map of all boooks
+     * @param authorMap - map of all authors
+     * @param publisherMap- publisher map
+     */
     public static void mainBookMenu(Scanner scanner, Map<Integer,Book> bookMap,Map<Integer,Author> authorMap, Map<Integer,Publisher> publisherMap){
         String line;
         int input = 40;
@@ -116,6 +123,14 @@ public class BookMenu {
         }
 
     }
+
+    /**
+     * allows user or pick a book to be updated, then sends chosen book to updateBookSubMenu to be updated
+     * @param scanner- Scanner set to an input stream of system.in
+     * @param bookMap - map of all books
+     * @param authorMap - map of all authors
+     * @param publisherMap - map of all publishers
+     */
     public static void updateBooks(Scanner scanner, Map<Integer,Book> bookMap, Map<Integer,Author> authorMap, Map<Integer,Publisher> publisherMap){
         if(bookMap.isEmpty()){
             System.out.println("!!!There are currently NO BOOKS saved in the system. No book can be updated!!!");
@@ -145,6 +160,16 @@ public class BookMenu {
         }
     }
 
+    /**
+     * sub-function of bookUpdate that takes an designated book
+     *and allows user to allows user to update the name, associated publisher, or associated author with any book
+     * used to make book updating recursive
+     * @param scanner - scanner set to system.in
+     * @param updateBookID- bookID of book to be updated
+     * @param bookMap - map of all books
+     * @param authorMap - map of all authors
+     * @param publisherMap - map of all publishers
+     */
     public static void updateBooksSubMenu(Scanner scanner,int updateBookID, Map<Integer,Book> bookMap, Map<Integer,Author> authorMap, Map<Integer,Publisher> publisherMap){
         System.out.println("Enter 1 to change the Author, 2 to Book change title, 3 to change the publisher title, or type the number \"999\" to CANCEL");
         String line = scanner.nextLine();

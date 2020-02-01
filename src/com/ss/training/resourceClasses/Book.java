@@ -63,7 +63,7 @@ public class Book {
      * @param publisher is the hashmap containing all of the publishers
      */
     public void printToConsole(Map<Integer, Author> author, Map<Integer, Publisher> publisher){
-        System.out.println("Book ID: " + this.bookID + "  Book Name : " + this.bookName + " Written By: " + author.get(this.authorID).getFullName() + " Published By: " + publisher.get(this.publisherID).getPublisherName());
+        System.out.println("Book ID: " + this.bookID + "______Book Name : " + this.bookName + "______Written By: " + author.get(this.authorID).getFullName() + "_____Published By: " + publisher.get(this.publisherID).getPublisherName());
     }
 
 
@@ -109,10 +109,4 @@ public class Book {
 
 
     }
-
-    static public void printMapToTxtFile() {
-
-    }
-
-
 }
