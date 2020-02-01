@@ -1,12 +1,13 @@
 package com.ss.training.resourceClasses;
 
 import java.util.Map;
+import java.util.Vector;
 
 public class Author {
     //Variables
     private int keyID;
     private String fullName;
-    //counter is used to keep track of the highest keyID for any instance of Author
+    //counter is used to keep track of the next keyID for any instance of Author
     //  for use of assigning new keyID to new instances of Author
     public static int counter= 0;
 
@@ -55,6 +56,11 @@ public class Author {
     }
 
     //Necessary map functionality
+    /**
+     * @param mapAuthor -map where all authors are saved
+     * @param authorName - the name of author to be added to map
+     * @return - returns the new authorID of the added quthor
+     */
     static public int addToMap(Map<Integer, Author> mapAuthor, String authorName) {
         Author a = new Author(Author.counter, authorName);
         mapAuthor.put(a.keyID, a);
@@ -62,14 +68,29 @@ public class Author {
         return a.keyID;
     }
 
+    /**
+     * deletes particular author from author map
+     * then checks and deletes any book with the same AuthorID as the deleted author
+     * @param authorMap- map of all authors
+     * @param bookMap - map of all books
+     * @param authorID - author ID to be deleted from authorMap
+     */
     static public void deleteFromMap(Map<Integer,Author> authorMap, Map<Integer,Book> bookMap, int authorID){
-        bookMap.forEach((k,v)->
-            {if(v.getAuthorID()==authorID)
-                Book.deleteFromMap(bookMap,v.getBookID());}
-                );
+        Vector<Integer> toBeDeletedBooks = new Vector<>();
+        bookMap.forEach((k,v)->{if(v.getAuthorID()==authorID){toBeDeletedBooks.add(v.getBookID());}});
+//        bookMap.forEach((k,v)->
+//            {if(v.getAuthorID()==authorID){
+//                Book.deleteFromMap(bookMap,v.getBookID());}}
+//                );
+        for(int i :toBeDeletedBooks)
+            Book.deleteFromMap(bookMap,i);
         authorMap.remove(authorID);
     }
 
+    /**
+     *Prints all authors stored in system to map
+     * @param mapAuthor - map of all authors
+     */
     static public void printMapToConsole(Map<Integer, Author> mapAuthor) {
         System.out.println("Full List of Authors \n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         mapAuthor.forEach((k,v)-> v.printToConsole());
