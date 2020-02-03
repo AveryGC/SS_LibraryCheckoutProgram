@@ -70,6 +70,7 @@ public class Main {
             catch(NumberFormatException e){ System.out.println("!!!!!!!!!Improper Input Format!!!!!!!!!!!!!");}
         }
 
+        scanner.close();
         //output to file
         MapToFile.saveAuthor(authorMap);
         MapToFile.saveBook(bookMap);
