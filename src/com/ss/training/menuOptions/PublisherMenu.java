@@ -149,10 +149,12 @@ public class PublisherMenu {
      */
     public static void updatePublisherSubMenu (Scanner scanner, Map<Integer, Publisher> publisherMap, int selectedID)
     {
+        //Gives user the option of changing name or address
         System.out.println("Enter 1 to update the name, enter 2 to update the address, or enter 999 to exit.");
         String line =scanner.nextLine();
         try {
             int input = Integer.parseInt(line);
+            //Updates selected authors name
             if(input==1) {
                 System.out.println("Enter the new name to replace the Publisher's existing name.");
                 String newName = scanner.nextLine();
@@ -161,6 +163,7 @@ public class PublisherMenu {
                 System.out.println("Publisher successfully updated.");
                 newPublisher.printToConsole();
             }
+            //updates selected authors address
             else if(input==2){
                 System.out.println("Enter the new name to replace the Publisher's address");
                 String newAddress = scanner.nextLine();
@@ -169,14 +172,17 @@ public class PublisherMenu {
                 System.out.println("Publisher successfully updated.");
                 newPublisher.printToConsole();
             }
+            //exits  to main publisher menu
             else if(input==999){
                 return;
             }
+            //Input was invalid and re-runs the subMenu
             else{
                 System.out.println("Input does not match available response options");
                 updatePublisherSubMenu(scanner,publisherMap,selectedID);
             }
         }
+        //Input was invalid and re-runs the subMenu
         catch (Exception e){
             System.out.println("!!Improper Input Format!!");
             updatePublisherSubMenu(scanner,publisherMap,selectedID);
@@ -204,6 +210,7 @@ public class PublisherMenu {
         Publisher.printMapToConsole(publisherMap);
         System.out.println("Input the ID of the Publisher you would like to select or type the number \"999\" to CANCEL.");
         String line = scanner.nextLine();
+        //Check to make sure the input was a valid publisher
         try {
             int input = Integer.parseInt(line);
             if (input == 999)
