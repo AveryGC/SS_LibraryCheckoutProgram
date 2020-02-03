@@ -76,14 +76,15 @@ public class Author {
      * @param authorID - author ID to be deleted from authorMap
      */
     static public void deleteFromMap(Map<Integer,Author> authorMap, Map<Integer,Book> bookMap, int authorID){
-        Vector<Integer> toBeDeletedBooks = new Vector<>();
-        bookMap.forEach((k,v)->{if(v.getAuthorID()==authorID){toBeDeletedBooks.add(v.getBookID());}});
 //        bookMap.forEach((k,v)->
 //            {if(v.getAuthorID()==authorID){
 //                Book.deleteFromMap(bookMap,v.getBookID());}}
 //                );
-        for(int i :toBeDeletedBooks)
-            Book.deleteFromMap(bookMap,i);
+        Vector<Integer> toBeDeletedBooks = new Vector<>();
+        bookMap.forEach((k,v)->{if(v.getAuthorID()==authorID){toBeDeletedBooks.add(v.getBookID());}});
+        toBeDeletedBooks.forEach(e->Book.deleteFromMap(bookMap,e));
+//        for(int i :toBeDeletedBooks)
+//            Book.deleteFromMap(bookMap,i);
         authorMap.remove(authorID);
     }
 

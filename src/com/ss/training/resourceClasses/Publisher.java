@@ -88,9 +88,10 @@ public class Publisher {
 //                {if(v.getPublisherID()==publisherID)
 //                    Book.deleteFromMap(bookMap,v.getBookID());}
 //        );
-        for (int i : toBeDeletedBooks)
-            Book.deleteFromMap(bookMap, i);
-        authorMap.remove(publisherID);
+        toBeDeletedBooks.forEach(e->Book.deleteFromMap(bookMap,e));
+//        for (int i : toBeDeletedBooks)
+//            Book.deleteFromMap(bookMap, i);
+//        authorMap.remove(publisherID);
     }
 
     /**
