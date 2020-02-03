@@ -1,4 +1,3 @@
 0,Avery Corbett
 1,George R Martin
 2,Tolkien
-3,Bobby Smurda

@@ -6,11 +6,11 @@ import com.ss.training.resourceClasses.Publisher;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.lang.reflect.MalformedParameterizedTypeException;
 import java.util.Map;
-import java.util.Set;
+
 
 public class MapToFile {
+
 
     //write authorMap to file
     public static void saveAuthor(Map<Integer, Author> authorMap){
