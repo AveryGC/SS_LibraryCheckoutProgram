@@ -67,7 +67,10 @@ public class PublisherMenu {
         }
         catch(Exception e)
         {
-            int newPub = Publisher.addToMap(publisherMap,input);
+            String publisherName = input;
+            System.out.println("Enter the Address of the publisher");
+            input = scanner.nextLine();
+            int newPub = Publisher.addToMap(publisherMap,publisherName,input);
             System.out.println("The following publisher has been successfully added:");
             publisherMap.get(newPub).printToConsole();
             return newPub;
@@ -90,7 +93,7 @@ public class PublisherMenu {
                 return;
             else{
                 if(publisherMap.containsKey(input)){
-                    Publisher deletedPublisher = new Publisher(publisherMap.get(input).getKeyID(),publisherMap.get(input).getPublisherName());
+                    Publisher deletedPublisher = new Publisher(publisherMap.get(input).getKeyID(),publisherMap.get(input).getPublisherName(),publisherMap.get(input).getPublisherAddress());
                     Publisher.deleteFromMap(publisherMap,bookMap,input);
                     System.out.print("Succefully Deleted ");
                     deletedPublisher.printToConsole();
@@ -115,20 +118,16 @@ public class PublisherMenu {
      */
     public static void updatePublishers(Scanner scanner, Map<Integer, Publisher> publisherMap){
         Publisher.printMapToConsole(publisherMap);
+        String line;
         System.out.println("Enter the Publisher ID of the author you would like to update or type the number \"999\" to CANCEL.");
-        String line = scanner.nextLine();
+        line = scanner.nextLine();
         try{
             int input = Integer.parseInt(line);
             if(input == 999)
                 System.out.println("Publisher Update Canceled");
             else{
                 if(publisherMap.containsKey(input)) {
-                    System.out.println("Enter the new name to replace the Publisher's existing name.");
-                    String newName = scanner.nextLine();
-                    Publisher newPublisher = new Publisher(input, newName);
-                    publisherMap.replace(input, newPublisher);
-                    System.out.println("Publisher successfully updated.");
-                    newPublisher.printToConsole();
+                    updatePublisherSubMenu(scanner, publisherMap, input);
                 }
                 else{
                     System.out.println("Publisher ID doesn't exist");
@@ -139,6 +138,48 @@ public class PublisherMenu {
         catch (NumberFormatException e){
             System.out.println("!!!!!!!!!!!!!!!!Improper Input Format!!!!!!!!!!!!!!!");
             updatePublishers(scanner,publisherMap);
+        }
+    }
+
+    /**
+     * used to make updating a publisher recursive when an input error is made
+     * @param scanner - scanner set to system.in
+     * @param publisherMap - map of all publishers
+     * @param selectedID - the selected ID of publisher to update
+     */
+    public static void updatePublisherSubMenu (Scanner scanner, Map<Integer, Publisher> publisherMap, int selectedID)
+    {
+        System.out.println("Enter 1 to update the name, enter 2 to update the address, or enter 999 to exit.");
+        String line =scanner.nextLine();
+        try {
+            int input = Integer.parseInt(line);
+            if(input==1) {
+                System.out.println("Enter the new name to replace the Publisher's existing name.");
+                String newName = scanner.nextLine();
+                Publisher newPublisher = new Publisher(selectedID, newName, publisherMap.get(selectedID).getPublisherAddress());
+                publisherMap.replace(selectedID, newPublisher);
+                System.out.println("Publisher successfully updated.");
+                newPublisher.printToConsole();
+            }
+            else if(input==2){
+                System.out.println("Enter the new name to replace the Publisher's address");
+                String newAddress = scanner.nextLine();
+                Publisher newPublisher = new Publisher(selectedID, publisherMap.get(selectedID).getPublisherName(), newAddress);
+                publisherMap.replace(selectedID, newPublisher);
+                System.out.println("Publisher successfully updated.");
+                newPublisher.printToConsole();
+            }
+            else if(input==999){
+                return;
+            }
+            else{
+                System.out.println("Input does not match available response options");
+                updatePublisherSubMenu(scanner,publisherMap,selectedID);
+            }
+        }
+        catch (Exception e){
+            System.out.println("!!Improper Input Format!!");
+            updatePublisherSubMenu(scanner,publisherMap,selectedID);
         }
     }
 

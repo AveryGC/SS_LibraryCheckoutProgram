@@ -1,4 +1,5 @@
-0,I Make Good Books
-1,Clearing House
-3,Backwoods Book Printing
-4,Big Book Publishing Company
+0@@Clearing House@@ Washington Dc
+1@@i make good books@@Kansas City , Misssouri
+3@@Backwoods Book Printing@@New Hampshire
+4@@Big Book Publishing Company@@ Seattle Washington
+5@@Famous Comedian Publishing@@1506 w40 St Norfolk, VA

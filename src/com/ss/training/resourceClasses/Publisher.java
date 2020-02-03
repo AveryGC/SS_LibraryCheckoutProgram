@@ -8,6 +8,7 @@ public class Publisher {
     //Publisher variables
     private int keyID;
     private String publisherName;
+    private String publisherAddress;
 
     //counter is used to keep track of the highest keyID for any instance of Publisher
     //  for use of assigning new keyID to new instances of Publisher
@@ -25,9 +26,10 @@ public class Publisher {
         Publisher.counter++;
     }
 
-    public Publisher(int keyID, String publisherName) {
+    public Publisher(int keyID, String publisherName, String publisherAddress) {
         this.keyID = keyID;
         this.publisherName = publisherName;
+        this.publisherAddress = publisherAddress;
     }
 
     //Set up get and set for variables
@@ -47,9 +49,13 @@ public class Publisher {
         this.publisherName = publisherName;
     }
 
+    public String getPublisherAddress() { return publisherAddress; }
+
+    public void setPublisherAddress(String publisherAddress) {this.publisherAddress = publisherAddress; }
+
     //prints to console
     public void printToConsole() {
-        System.out.println("ID: " + this.keyID + " Name : " + this.publisherName);
+        System.out.println("ID: " + this.keyID + " Name : " + this.publisherName + "_______Address: " + this.publisherAddress);
     }
 
 
@@ -62,8 +68,8 @@ public class Publisher {
      * @param publisherName - name of publisher to be added
      * @return - returns the keyID of publisher added
      */
-    static public int addToMap(Map<Integer, Publisher> pubMap, String publisherName) {
-        Publisher p = new Publisher(Publisher.counter, publisherName);
+    static public int addToMap(Map<Integer, Publisher> pubMap, String publisherName, String publisherAddress) {
+        Publisher p = new Publisher(Publisher.counter, publisherName, publisherAddress);
         pubMap.put(p.keyID, p);
         Publisher.counter++;
         return p.keyID;
@@ -73,11 +79,11 @@ public class Publisher {
      * deletes particular publisher from publisher map
      * then checks and deletes any book with the same publisherID as the deleted publisher
      *
-     * @param authorMap-  map of all authors
+     * @param publisherMap-  map of all authors
      * @param bookMap     - map of all books
      * @param publisherID - ID of publisher to be deleted
      */
-    static public void deleteFromMap(Map<Integer, Publisher> authorMap, Map<Integer, Book> bookMap, int publisherID) {
+    static public void deleteFromMap(Map<Integer, Publisher> publisherMap, Map<Integer, Book> bookMap, int publisherID) {
         Vector<Integer> toBeDeletedBooks = new Vector<>();
         bookMap.forEach((k, v) -> {
             if (v.getPublisherID() == publisherID) {
@@ -92,6 +98,7 @@ public class Publisher {
 //        for (int i : toBeDeletedBooks)
 //            Book.deleteFromMap(bookMap, i);
 //        authorMap.remove(publisherID);
+        publisherMap.remove(publisherID);
     }
 
     /**

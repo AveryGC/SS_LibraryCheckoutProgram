@@ -29,7 +29,7 @@ public class FileToMap {
              * Sets the Author counter to be 1 above the highest current Author ID
              */
             while (line != null) {
-                String splitLine[] = line.split(",");
+                String splitLine[] = line.split("@@");
                 Author a = new Author(Integer.parseInt(splitLine[0]),splitLine[1]);
                 authorMap.put(a.getKeyID(),a);
                 if(Integer.parseInt(splitLine[0])>=Author.counter)
@@ -59,8 +59,8 @@ public class FileToMap {
              * Sets the Author counter to be 1 above the highest current Author ID
              */
             while (line != null) {
-                String splitLine[] = line.split(",");
-                Publisher a = new Publisher(Integer.parseInt(splitLine[0]),splitLine[1]);
+                String splitLine[] = line.split("@@");
+                Publisher a = new Publisher(Integer.parseInt(splitLine[0]),splitLine[1],splitLine[2]);
                 publisherMap.put(a.getKeyID(),a);
                 if(Integer.parseInt(splitLine[0])>=Publisher.counter)
                     Publisher.counter = Integer.parseInt(splitLine[0]) +1;
@@ -90,7 +90,7 @@ public class FileToMap {
              * Sets the Author counter to be 1 above the highest current Author ID
              */
             while (line != null) {
-                String splitLine[] = line.split(",");
+                String splitLine[] = line.split("@@");
                 Book a = new Book(Integer.parseInt(splitLine[0]),splitLine[1],Integer.parseInt(splitLine[2]),Integer.parseInt(splitLine[3]));
                 bookMap.put(a.getBookID(), a);
                 if(Integer.parseInt(splitLine[0])>=Book.counter)
