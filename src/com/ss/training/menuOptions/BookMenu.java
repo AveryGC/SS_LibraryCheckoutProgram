@@ -105,8 +105,8 @@ public class BookMenu {
             else{
                 if(bookMap.containsKey(input)){
                     Book deletedBook = new Book(bookMap.get(input).getBookID(),bookMap.get(input).getBookName(),bookMap.get(input).getAuthorID(),bookMap.get(input).getPublisherID());
+                    System.out.println("Succefully deleted:");
                     Book.deleteFromMap(bookMap,input);
-                    System.out.print("Succefully deleted ");
                     deletedBook.printToConsole(authorMap,publisherMap);
                     System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                 }

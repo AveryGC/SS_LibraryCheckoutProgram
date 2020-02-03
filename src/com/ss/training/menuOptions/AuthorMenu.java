@@ -126,10 +126,9 @@ public class AuthorMenu {
                 if (authorMap.containsKey(input)) {
                     System.out.println("Enter the new name to replace the authors existing name.");
                     String newName = scanner.nextLine();
-                    Author newAuthor = new Author(input, newName);
-                    authorMap.replace(input, newAuthor);
+                    authorMap.get(input).setFullName(newName);
                     System.out.println("Author successfully updated.");
-                    newAuthor.printToConsole();
+                    authorMap.get(input).printToConsole();;
                 } else {
                     System.out.println("Author ID doesn't exist");
                     updateAuthor(scanner, authorMap);

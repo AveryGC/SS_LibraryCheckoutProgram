@@ -158,20 +158,22 @@ public class PublisherMenu {
             if(input==1) {
                 System.out.println("Enter the new name to replace the Publisher's existing name.");
                 String newName = scanner.nextLine();
-                Publisher newPublisher = new Publisher(selectedID, newName, publisherMap.get(selectedID).getPublisherAddress());
-                publisherMap.replace(selectedID, newPublisher);
+                publisherMap.get(selectedID).setPublisherName(newName);
                 System.out.println("Publisher successfully updated.");
-                newPublisher.printToConsole();
+                publisherMap.get(selectedID).printToConsole();;
             }
             //updates selected authors address
             else if(input==2){
                 System.out.println("Enter the new name to replace the Publisher's address");
                 String newAddress = scanner.nextLine();
-                Publisher newPublisher = new Publisher(selectedID, publisherMap.get(selectedID).getPublisherName(), newAddress);
-                publisherMap.replace(selectedID, newPublisher);
+//                Publisher newPublisher = new Publisher(selectedID, publisherMap.get(selectedID).getPublisherName(), newAddress);
+//                publisherMap.replace(selectedID, newPublisher);
+                publisherMap.get(selectedID).setPublisherAddress(newAddress);
                 System.out.println("Publisher successfully updated.");
-                newPublisher.printToConsole();
+//                newPublisher.printToConsole();
+                publisherMap.get(selectedID).printToConsole();
             }
+
             //exits  to main publisher menu
             else if(input==999){
                 return;
