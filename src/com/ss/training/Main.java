@@ -20,6 +20,7 @@ public class Main {
         Map<Integer, Book>  bookMap = new HashMap<Integer,Book>();
         Map<Integer, Publisher> publisherMap = new HashMap<Integer,Publisher>();
 
+
         //Read files and setup initial HashMaps for authors, books and publishers
         FileToMap filetomap = new FileToMap();
         boolean authorFileSuccess = filetomap.readAuthor(authorMap);
