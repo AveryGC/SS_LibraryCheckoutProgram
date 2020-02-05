@@ -1,5 +1,6 @@
 package com.ss.training.menuOptions;
 
+import com.ss.training.MapInterfaces.PublisherMapInterface;
 import com.ss.training.resourceClasses.Book;
 import com.ss.training.resourceClasses.Publisher;
 
@@ -13,7 +14,7 @@ public class PublisherMenu {
      * @param bookMap - map of all books
      * @param publisherMap - map of all publishers
      */
-    public static void mainPublisherMenu(Scanner scanner, Map<Integer,Book> bookMap, Map<Integer,Publisher> publisherMap) {
+    public void mainPublisherMenu(Scanner scanner, Map<Integer,Book> bookMap, Map<Integer,Publisher> publisherMap) {
         String line;
         int input = 40;
         while (input != 999){
@@ -54,7 +55,7 @@ public class PublisherMenu {
      * @param publisherMap - map of all publisher
      * @return - the publisherID of book created or 999 if nothing is created
      */
-    public static int addPublisher(Scanner scanner, Map<Integer, Publisher> publisherMap){
+    public int addPublisher(Scanner scanner, Map<Integer, Publisher> publisherMap){
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("Enter Name of Publisher you would like to add, or enter the number \"999\" into the console to go back.");
         String input = scanner.nextLine();
@@ -70,7 +71,8 @@ public class PublisherMenu {
             String publisherName = input;
             System.out.println("Enter the Address of the publisher");
             input = scanner.nextLine();
-            int newPub = Publisher.addToMap(publisherMap,publisherName,input);
+            PublisherMapInterface publishemapinterface = new PublisherMapInterface();
+            int newPub = publishemapinterface.addToMap(publisherMap,publisherName,input);
             System.out.println("The following publisher has been successfully added:");
             publisherMap.get(newPub).printToConsole();
             return newPub;
@@ -83,8 +85,9 @@ public class PublisherMenu {
      * @param bookMap - map of all books
      * @param publisherMap - map of all publishers
      */
-    public static void deletePublisher(Scanner scanner, Map<Integer, Book> bookMap, Map<Integer, Publisher> publisherMap){
-        Publisher.printMapToConsole(publisherMap);
+    public void deletePublisher(Scanner scanner, Map<Integer, Book> bookMap, Map<Integer, Publisher> publisherMap){
+        PublisherMapInterface publishemapinterface = new PublisherMapInterface();
+        publishemapinterface.printMapToConsole(publisherMap);
         System.out.println("Enter the Publisher ID of the publisher you would like to delete or type the number \"999\" to RETURN to last page.");
         String line = scanner.nextLine();
         try {
@@ -94,7 +97,7 @@ public class PublisherMenu {
             else{
                 if(publisherMap.containsKey(input)){
                     Publisher deletedPublisher = new Publisher(publisherMap.get(input).getKeyID(),publisherMap.get(input).getPublisherName(),publisherMap.get(input).getPublisherAddress());
-                    Publisher.deleteFromMap(publisherMap,bookMap,input);
+                    publishemapinterface.deleteFromMap(publisherMap,bookMap,input);
                     System.out.print("Succefully Deleted ");
                     deletedPublisher.printToConsole();
                     System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -116,8 +119,9 @@ public class PublisherMenu {
      * @param scanner - scanner set to ifstream of system.in
      * @param publisherMap- map of all publishers
      */
-    public static void updatePublishers(Scanner scanner, Map<Integer, Publisher> publisherMap){
-        Publisher.printMapToConsole(publisherMap);
+    public void updatePublishers(Scanner scanner, Map<Integer, Publisher> publisherMap){
+        PublisherMapInterface publishemapinterface = new PublisherMapInterface();
+        publishemapinterface.printMapToConsole(publisherMap);
         String line;
         System.out.println("Enter the Publisher ID of the author you would like to update or type the number \"999\" to CANCEL.");
         line = scanner.nextLine();
@@ -147,7 +151,7 @@ public class PublisherMenu {
      * @param publisherMap - map of all publishers
      * @param selectedID - the selected ID of publisher to update
      */
-    public static void updatePublisherSubMenu (Scanner scanner, Map<Integer, Publisher> publisherMap, int selectedID)
+    public void updatePublisherSubMenu (Scanner scanner, Map<Integer, Publisher> publisherMap, int selectedID)
     {
         //Gives user the option of changing name or address
         System.out.println("Enter 1 to update the name, enter 2 to update the address, or enter 999 to exit.");
@@ -195,11 +199,12 @@ public class PublisherMenu {
      * prints all publishers to screen
      * @param publisherMap - map of all publishers
      */
-    public static void readAllPublishers(Map<Integer, Publisher> publisherMap) {
+    public void readAllPublishers(Map<Integer, Publisher> publisherMap) {
+        PublisherMapInterface publishermapinterface = new PublisherMapInterface();
         if(publisherMap.isEmpty())
             System.out.println("There are currently NO PUBLISHERS saved in the system.");
         else
-            Publisher.printMapToConsole(publisherMap);
+            publishermapinterface.printMapToConsole(publisherMap);
     }
 
     /**
@@ -208,8 +213,9 @@ public class PublisherMenu {
      * @param publisherMap - map of all publishers
      * @return - returns the selected publisher ID or returns 999 if operation canceled
      */
-    public static int selectAPublisher(Scanner scanner, Map<Integer, Publisher> publisherMap) {
-        Publisher.printMapToConsole(publisherMap);
+    public int selectAPublisher(Scanner scanner, Map<Integer, Publisher> publisherMap) {
+        PublisherMapInterface publishermapinterface = new PublisherMapInterface();
+        publishermapinterface.printMapToConsole(publisherMap);
         System.out.println("Input the ID of the Publisher you would like to select or type the number \"999\" to CANCEL.");
         String line = scanner.nextLine();
         //Check to make sure the input was a valid publisher

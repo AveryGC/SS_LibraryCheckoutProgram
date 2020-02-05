@@ -18,7 +18,7 @@ public class FileToMap {
      * @param authorMap- HashMap of all the books
      * @return returns true if files was succesfully read and false if file could not be read
      */
-    public static boolean readAuthor(Map<Integer, Author> authorMap){
+    public boolean readAuthor(Map<Integer, Author> authorMap){
         try(BufferedReader bufferedreader = new BufferedReader(new FileReader("resources/Author.txt"))){
             String line = bufferedreader.readLine();
 
@@ -47,7 +47,7 @@ public class FileToMap {
      * @param publisherMap-HashMap of all the publishers
      * @return returns true if files was succesfully read and false if file could not be read
      */
-    public static boolean readPublisher(Map<Integer, Publisher> publisherMap){
+    public boolean readPublisher(Map<Integer, Publisher> publisherMap){
         //Try and open text file
         try(BufferedReader bufferedreader = new BufferedReader(new FileReader("resources/Publisher.txt"))){
             String line = bufferedreader.readLine();
@@ -78,7 +78,7 @@ public class FileToMap {
      * @param bookMap-HashMap of all the books
      * @return returns true if files was succesfully read and false if file could not be read
      */
-    public static boolean readBook(Map<Integer, Book> bookMap ){
+    public boolean readBook(Map<Integer, Book> bookMap ){
         //Try and open text filebook
         try(BufferedReader bufferedreader = new BufferedReader(new FileReader("resources/Book.txt"))){
             String line = bufferedreader.readLine();

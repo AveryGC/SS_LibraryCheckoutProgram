@@ -1,5 +1,6 @@
 package com.ss.training.menuOptions;
 
+import com.ss.training.MapInterfaces.BookMapInterface;
 import com.ss.training.resourceClasses.Author;
 import com.ss.training.resourceClasses.Book;
 import com.ss.training.resourceClasses.Publisher;
@@ -16,7 +17,7 @@ public class BookMenu {
      * @param authorMap - map of all authors
      * @param publisherMap- publisher map
      */
-    public static void mainBookMenu(Scanner scanner, Map<Integer,Book> bookMap,Map<Integer,Author> authorMap, Map<Integer,Publisher> publisherMap){
+    public void mainBookMenu(Scanner scanner, Map<Integer,Book> bookMap,Map<Integer,Author> authorMap, Map<Integer,Publisher> publisherMap){
         String line;
         int input = 40;
         while (input != 999){
@@ -25,6 +26,7 @@ public class BookMenu {
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("Enter 1 to add a book, 2 to delete a book, 3 to update a book, 4 to read all books, or 999 to exit");
             line = scanner.nextLine();
+            BookMenu bookmenu = new BookMenu();
             try {
                 input = Integer.parseInt(line);
                 switch (input) {
@@ -60,7 +62,7 @@ public class BookMenu {
      * @param publisherMap - hashmap of all publishers
      * @return - returns the BookID of newly added book or returns 999 if no book added
      */
-    public static int addBooks(Scanner scanner, Map<Integer,Book> bookMap,Map<Integer,Author> authorMap, Map<Integer,Publisher> publisherMap){
+    public int addBooks(Scanner scanner, Map<Integer,Book> bookMap,Map<Integer,Author> authorMap, Map<Integer,Publisher> publisherMap){
         System.out.println("Enter the Name of the New Book or type the number \"999\" to RETURN to last page.");
         String name = scanner.nextLine();
         try{
@@ -81,7 +83,8 @@ public class BookMenu {
             }
             return 999;
         }
-        int newBookNum = Book.addToMap(bookMap, name,newAuthorID,newPublisherID);
+        BookMapInterface bookmapinterface = new BookMapInterface();
+        int newBookNum = bookmapinterface.addToMap(bookMap, name,newAuthorID,newPublisherID);
         System.out.println("The following book has been added:");
         bookMap.get(newBookNum).printToConsole(authorMap,publisherMap);
         return newBookNum;
@@ -94,8 +97,10 @@ public class BookMenu {
      * @param authorMap - hashmap of all authors
      * @param publisherMap - hashmap of all publishers
      */
-    public static void deleteBooks(Scanner scanner, Map<Integer,Book> bookMap, Map<Integer,Author> authorMap, Map<Integer,Publisher> publisherMap){
-        Book.printMapToConsole(bookMap,authorMap,publisherMap);
+
+    public  void deleteBooks(Scanner scanner, Map<Integer,Book> bookMap, Map<Integer,Author> authorMap, Map<Integer,Publisher> publisherMap){
+        BookMapInterface bookmapinterface = new BookMapInterface();
+        bookmapinterface.printMapToConsole(bookMap,authorMap,publisherMap);
         System.out.println("Enter the Book ID of the book you would like to delete or type the number \"999\" to RETURN to last page.");
         String line = scanner.nextLine();
         try {
@@ -106,7 +111,7 @@ public class BookMenu {
                 if(bookMap.containsKey(input)){
                     Book deletedBook = new Book(bookMap.get(input).getBookID(),bookMap.get(input).getBookName(),bookMap.get(input).getAuthorID(),bookMap.get(input).getPublisherID());
                     System.out.println("Succefully deleted:");
-                    Book.deleteFromMap(bookMap,input);
+                    bookmapinterface.deleteFromMap(bookMap,input);
                     deletedBook.printToConsole(authorMap,publisherMap);
                     System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                 }
@@ -130,12 +135,13 @@ public class BookMenu {
      * @param authorMap - map of all authors
      * @param publisherMap - map of all publishers
      */
-    public static void updateBooks(Scanner scanner, Map<Integer,Book> bookMap, Map<Integer,Author> authorMap, Map<Integer,Publisher> publisherMap){
+    public void updateBooks(Scanner scanner, Map<Integer,Book> bookMap, Map<Integer,Author> authorMap, Map<Integer,Publisher> publisherMap){
         if(bookMap.isEmpty()){
             System.out.println("!!!There are currently NO BOOKS saved in the system. No book can be updated!!!");
             return;
         }
-        Book.printMapToConsole(bookMap,authorMap,publisherMap);
+        BookMapInterface bookmapinterface = new BookMapInterface();
+        bookmapinterface.printMapToConsole(bookMap,authorMap,publisherMap);
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("Enter the BookID of the book you would like to update or type the number \"999\" to CANCEL");
         String line = scanner.nextLine();
@@ -169,7 +175,7 @@ public class BookMenu {
      * @param authorMap - map of all authors
      * @param publisherMap - map of all publishers
      */
-    public static void updateBooksSubMenu(Scanner scanner,int updateBookID, Map<Integer,Book> bookMap, Map<Integer,Author> authorMap, Map<Integer,Publisher> publisherMap){
+    public void updateBooksSubMenu(Scanner scanner,int updateBookID, Map<Integer,Book> bookMap, Map<Integer,Author> authorMap, Map<Integer,Publisher> publisherMap){
         System.out.println("Enter 1 to change the Author, 2 to Book change title, 3 to change the publisher title, or type the number \"999\" to CANCEL");
         String line = scanner.nextLine();
         try{
@@ -220,11 +226,12 @@ public class BookMenu {
      * @param authorMap - hash map of all
      * @param publisherMap - hash map of all publishers
      */
-    public static void readAllBooks(Map<Integer, Book> bookMap, Map<Integer, Author> authorMap, Map<Integer, Publisher> publisherMap){
+    public void readAllBooks(Map<Integer, Book> bookMap, Map<Integer, Author> authorMap, Map<Integer, Publisher> publisherMap){
+        BookMapInterface bookmapinterface = new BookMapInterface();
         if(bookMap.isEmpty())
             System.out.println("There are currently NO BOOKS saved in the system.");
         else
-            Book.printMapToConsole(bookMap,authorMap,publisherMap);
+            bookmapinterface.printMapToConsole(bookMap,authorMap,publisherMap);
     }
 
     /**
@@ -234,21 +241,22 @@ public class BookMenu {
      * @param authorMap - hashMap of all authors
      * @return the authorID of selected author or of created author
      */
-    public static int getAuthorID(Scanner scanner, Map<Integer, Author> authorMap){
+    public int getAuthorID(Scanner scanner, Map<Integer, Author> authorMap){
         System.out.println("Type 1 to assign new author to the book, press 2 too assign existing author or or type the number \"999\" to CANCEL.");
         String line =scanner.nextLine();
+        AuthorMenu authormenu = new AuthorMenu();
         try{
             int input = Integer.parseInt(line);
             if(input == 999)
                 return 999;
             else if(input == 1)
-                return AuthorMenu.addAuthor(scanner, authorMap);
+                return authormenu.addAuthor(scanner, authorMap);
             else if(input == 2 && authorMap.isEmpty()){
                 System.out.println("Author Map is Empty.");
-                return AuthorMenu.addAuthor(scanner,authorMap);
+                return authormenu.addAuthor(scanner,authorMap);
             }
             else if(input== 2 && !authorMap.isEmpty()){
-               return AuthorMenu.selectAnAuthor(scanner,authorMap);
+               return authormenu.selectAnAuthor(scanner,authorMap);
             }
             else{
                 System.out.println("Improper Input, please select 1 or 2.");
@@ -268,21 +276,22 @@ public class BookMenu {
      * @param publisherMap - map of all the publishers
      * @return - returns either the newly created publisher ID or the chosen existing publisher ID
      */
-    public static int getPublisherID(Scanner scanner, Map<Integer, Publisher> publisherMap){
+    public int getPublisherID(Scanner scanner, Map<Integer, Publisher> publisherMap){
         System.out.println("Type 1 to assign new publisher to the book, press 2 too assign existing publisher or or type the number \"999\" to CANCEL.");
         String line =scanner.nextLine();
+        PublisherMenu publishermenu = new PublisherMenu();
         try{
             int input = Integer.parseInt(line);
             if(input == 999)
                 return 999;
             else if(input == 1)
-                return PublisherMenu.addPublisher(scanner, publisherMap);
+                return publishermenu.addPublisher(scanner, publisherMap);
             else if(input == 2 && publisherMap.isEmpty()){
                 System.out.println("Publisher Map is Empty.");
-                return PublisherMenu.addPublisher(scanner,publisherMap);
+                return publishermenu.addPublisher(scanner,publisherMap);
             }
             else if(input== 2 && !publisherMap.isEmpty()){
-                return PublisherMenu.selectAPublisher(scanner,publisherMap);
+                return publishermenu.selectAPublisher(scanner,publisherMap);
             }
             else{
                 System.out.println("Improper Input, please select 1 or 2.");

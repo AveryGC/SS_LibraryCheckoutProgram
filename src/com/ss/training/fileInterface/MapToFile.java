@@ -13,7 +13,7 @@ public class MapToFile {
 
 
     //write authorMap to file
-    public static void saveAuthor(Map<Integer, Author> authorMap){
+    public void saveAuthor(Map<Integer, Author> authorMap){
         try(FileWriter writer = new FileWriter(new File("resources/Author.txt"))){
 //            Set<Integer> keySet= authorMap.keySet();
             for(int i : authorMap.keySet()){
@@ -26,7 +26,7 @@ public class MapToFile {
     }
 
     //writes bookMap to file
-    public static void saveBook(Map<Integer,Book> bookMap){
+    public void saveBook(Map<Integer,Book> bookMap){
         try (FileWriter writer = new FileWriter(new File("resources/Book.txt"))){
 //            Set<Integer> keySet = bookMap.keySet();
             for(int i : bookMap.keySet()){
@@ -42,7 +42,7 @@ public class MapToFile {
 
 
     //writes publisherMap to file
-    public static void savePublisehr(Map<Integer, Publisher> publisherMap){
+    public void savePublisehr(Map<Integer, Publisher> publisherMap){
         try(FileWriter writer = new FileWriter(new File("resources/Publisher.txt"))){
 //            Set<Integer> keySet = publisherMap.keySet();
             for(int i : publisherMap.keySet()){

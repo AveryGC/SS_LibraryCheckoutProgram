@@ -21,9 +21,10 @@ public class Main {
         Map<Integer, Publisher> publisherMap = new HashMap<Integer,Publisher>();
 
         //Read files and setup initial HashMaps for authors, books and publishers
-        boolean authorFileSuccess = FileToMap.readAuthor(authorMap);
-        boolean publisherFileSuccess= FileToMap.readPublisher(publisherMap);
-        boolean bookFileSuccess = FileToMap.readBook(bookMap);
+        FileToMap filetomap = new FileToMap();
+        boolean authorFileSuccess = filetomap.readAuthor(authorMap);
+        boolean publisherFileSuccess= filetomap.readPublisher(publisherMap);
+        boolean bookFileSuccess = filetomap.readBook(bookMap);
 
         //Check to make sure file upload was succeful before running rest of program
         if(authorFileSuccess && publisherFileSuccess && bookFileSuccess){
@@ -48,17 +49,20 @@ public class Main {
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("Enter 1 to travel to the Author menu, 2 for the Book Menu, or 3 for the Publisher Menu.\nOr Enter \"999\" to exit program.");
             line = scanner.nextLine();
+            AuthorMenu authormenu = new AuthorMenu();
+            BookMenu bookmenu = new BookMenu();
+            PublisherMenu publishermenu = new PublisherMenu();
             try{
                 input = Integer.parseInt(line);
                 switch (input){
                     case 1:
-                        AuthorMenu.mainAuthorMenu(scanner,bookMap,authorMap);
+                        authormenu.mainAuthorMenu(scanner,bookMap,authorMap);
                         break;
                     case 2:
-                        BookMenu.mainBookMenu(scanner,bookMap,authorMap,publisherMap);
+                        bookmenu.mainBookMenu(scanner,bookMap,authorMap,publisherMap);
                         break;
                     case 3:
-                        PublisherMenu.mainPublisherMenu(scanner,bookMap,publisherMap);
+                        publishermenu.mainPublisherMenu(scanner,bookMap,publisherMap);
                         break;
                     case 999:
                         System.out.println("Program is being terminated");
@@ -72,9 +76,10 @@ public class Main {
 
         scanner.close();
         //output to file
-        MapToFile.saveAuthor(authorMap);
-        MapToFile.saveBook(bookMap);
-        MapToFile.savePublisehr(publisherMap);
+        MapToFile maptofile =new MapToFile();
+        maptofile.saveAuthor(authorMap);
+        maptofile.saveBook(bookMap);
+        maptofile.savePublisehr(publisherMap);
 
 
 

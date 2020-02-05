@@ -1,5 +1,7 @@
 package com.ss.training.menuOptions;
 
+import com.ss.training.MapInterfaces.AuthorMapInterface;
+import com.ss.training.MapInterfaces.PublisherMapInterface;
 import com.ss.training.resourceClasses.Author;
 import com.ss.training.resourceClasses.Book;
 
@@ -14,7 +16,7 @@ public class AuthorMenu {
      * @param bookMap - Map of all books
      * @param authorMap - map of all authors
      */
-    public static void  mainAuthorMenu(Scanner scanner, Map<Integer,Book> bookMap, Map<Integer,Author> authorMap) {
+    public void  mainAuthorMenu(Scanner scanner, Map<Integer,Book> bookMap, Map<Integer,Author> authorMap) {
         String line;
         int input = 40;
         while (input != 999){
@@ -57,7 +59,7 @@ public class AuthorMenu {
      * @param authorMap- map of all authors
      * @return
      */
-    public static int addAuthor(Scanner scanner, Map<Integer, Author> authorMap) {
+    public int addAuthor(Scanner scanner, Map<Integer, Author> authorMap) {
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("Enter Name of Author you would like to add, or enter the number \"999\" to CANCEL.");
         String input = scanner.nextLine();
@@ -68,7 +70,8 @@ public class AuthorMenu {
             else
                 throw new Exception();
         } catch (Exception e) {
-            int newAuthor = Author.addToMap(authorMap, input);
+            AuthorMapInterface authormapinterface = new AuthorMapInterface();
+            int newAuthor = authormapinterface.addToMap(authorMap, input);
             System.out.println("The following author has been added:");
             authorMap.get(newAuthor).printToConsole();
             return newAuthor;
@@ -81,8 +84,9 @@ public class AuthorMenu {
      * @param bookMap    - map of all books
      * @param authorMap- map of all authors
      */
-    public static void deleteAuthor(Scanner scanner, Map<Integer, Book> bookMap, Map<Integer, Author> authorMap) {
-        Author.printMapToConsole(authorMap);
+    public void deleteAuthor(Scanner scanner, Map<Integer, Book> bookMap, Map<Integer, Author> authorMap) {
+        AuthorMapInterface authormapinterface = new AuthorMapInterface();
+        authormapinterface.printMapToConsole(authorMap);
         System.out.println("Enter the Author ID of the author you would like to delete or type the number \"999\" to CANCEL.");
         String line = scanner.nextLine();
         try {
@@ -92,7 +96,7 @@ public class AuthorMenu {
             else {
                 if (authorMap.containsKey(input)) {
                     Author deletedAuthor = new Author(authorMap.get(input).getKeyID(), authorMap.get(input).getFullName());
-                    Author.deleteFromMap(authorMap, bookMap, input);
+                    authormapinterface.deleteFromMap(authorMap, bookMap, input);
                     System.out.print("Succefully Deleted ");
                     deletedAuthor.printToConsole();
                     System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -114,8 +118,9 @@ public class AuthorMenu {
      * @param scanner    - Scanner with system.in as the input stream
      * @param authorMap- map of all authors in system
      */
-    public static void updateAuthor(Scanner scanner, Map<Integer, Author> authorMap) {
-        Author.printMapToConsole(authorMap);
+    public void updateAuthor(Scanner scanner, Map<Integer, Author> authorMap) {
+        AuthorMapInterface authormapinterface = new AuthorMapInterface();
+        authormapinterface.printMapToConsole(authorMap);
         System.out.println("Enter the Author ID of the author you would like to update or type the number \"999\" to CANCEL.");
         String line = scanner.nextLine();
         try {
@@ -145,11 +150,12 @@ public class AuthorMenu {
      *
      * @param authorMap - hashmap of all authors
      */
-    public static void readAllAuthors(Map<Integer, Author> authorMap) {
+    public void readAllAuthors(Map<Integer, Author> authorMap) {
+        AuthorMapInterface authormapinterface = new AuthorMapInterface();
         if (authorMap.isEmpty())
             System.out.println("There are currently NO AUTHORS stored in the system.");
         else
-            Author.printMapToConsole(authorMap);
+            authormapinterface.printMapToConsole(authorMap);
     }
 
     /**
@@ -158,8 +164,9 @@ public class AuthorMenu {
      * @param authorMap - map of all authors
      * @return - the selected id of author or the new id created by author
      */
-    public static int selectAnAuthor(Scanner scanner, Map<Integer, Author> authorMap) {
-        Author.printMapToConsole(authorMap);
+    public int selectAnAuthor(Scanner scanner, Map<Integer, Author> authorMap) {
+        AuthorMapInterface authormapinterface = new AuthorMapInterface();
+        authormapinterface.printMapToConsole(authorMap);
         System.out.println("Input the ID of the Author you would like to select or type the number \"999\" to CANCEL.");
         String line = scanner.nextLine();
         try {
